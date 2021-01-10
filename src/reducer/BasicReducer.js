@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 
 const initialState = 0
-const reducer = useReducer(initialState, action) => {
+const reducer = (currentState, action) => {
     switch (action) {
         case 'add_1':
             return currentState + 1
@@ -15,8 +15,15 @@ const reducer = useReducer(initialState, action) => {
 }
 
 const BasicReducer = () => {
+    const [count, dispatch] = useReducer(reducer, initialState)
     return (
-        <></>
+        <>
+            <div>Count: { count }</div>
+            <button onClick={()=>dispatch('add_1')}>Add_1</button>
+            <button onClick={()=>dispatch('multiple_3')}>Multiple_3</button>
+            <button onClick={()=>dispatch('reset')}>reset</button>
+            <button onClick={()=>dispatch()}>default</button>
+        </>
     )
 }
 
