@@ -3,7 +3,8 @@ import './App.css';
 // import FetchApi from "./apis/FetchApi";
 import AppContext from "./context/AppContext";
 import React, { useReducer } from 'react'
-import CompB from "./components/CompB";
+// import CompB from "./components/CompB";
+import Memo from "./memo/Memo";
 
 const initialState = 0
 const reducer = (currentState, action) => {
@@ -29,8 +30,9 @@ function App() {
                 {/*<FetchApi />*/}
                 {/*<B />*/}
                 {/*<BasicReducer />*/}
-                親Count: { count }
-                <CompB />
+                {/*親Count: { count }*/}
+                {/*<CompB />*/}
+                <Memo />
             </header>
          </div>
       </AppContext.Provider>
