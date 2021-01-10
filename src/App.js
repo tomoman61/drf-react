@@ -1,21 +1,40 @@
 import './App.css';
-import BasicReducer from "./reducer/BasicReducer";
+// import BasicReducer from "./reducer/BasicReducer";
 // import FetchApi from "./apis/FetchApi";
-// import AppContext from "./context/AppContext";
-// import B from './components/B'
+import AppContext from "./context/AppContext";
+import React, { useReducer } from 'react'
+import CompB from "./components/CompB";
+
+const initialState = 0
+const reducer = (currentState, action) => {
+    switch (action) {
+        case 'add_1':
+            return currentState + 1
+        case 'multiple_3':
+            return currentState * 3
+        case 'reset':
+            return initialState
+        default:
+            return currentState
+    }
+}
 
 function App() {
-  return (
-      // <AppContext.Provider value={'value from App.js'}>
+    const [count, dispatch] = useReducer(reducer, initialState)
+    return (
+      <AppContext.Provider value={{countProvided: count, dispatchProvided: dispatch}}>
          <div className="App">
             <header className="App-header">
+                <h3>App.js</h3>
                 {/*<FetchApi />*/}
                 {/*<B />*/}
-                <BasicReducer />
+                {/*<BasicReducer />*/}
+                親Count: { count }
+                <CompB />
             </header>
          </div>
-      // </AppContext.Provider>
-  );
+      </AppContext.Provider>
+    );
 }
 
 export default App;
