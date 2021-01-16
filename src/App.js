@@ -1,10 +1,12 @@
-import './App.css';
+import './css/App.css';
 // import BasicReducer from "./reducer/BasicReducer";
 // import FetchApi from "./apis/FetchApi";
 import AppContext from "./context/AppContext";
-import React, { useReducer } from 'react'
+import React, { useState, useReducer, useCallback } from 'react'
 // import CompB from "./components/CompB";
-import Memo from "./memo/Memo";
+// import Memo from "./memo/Memo";
+import CountDisplay from "./callback/CountDisplay";
+import CountClick from "./callback/CountClick";
 
 const initialState = 0
 const reducer = (currentState, action) => {
@@ -22,6 +24,18 @@ const reducer = (currentState, action) => {
 
 function App() {
     const [count, dispatch] = useReducer(reducer, initialState)
+
+    const [count1, setCount1] = useState(0);
+    const [count2, setCount2] = useState(0);
+
+    const addCount1 = useCallback(() => {
+        setCount1(count1 => count1 + 1)
+    }, [])
+
+    const addCount2 = useCallback(() => {
+        setCount2(count2 => count2 + 1)
+    }, [])
+
     return (
       <AppContext.Provider value={{countProvided: count, dispatchProvided: dispatch}}>
          <div className="App">
@@ -32,7 +46,11 @@ function App() {
                 {/*<BasicReducer />*/}
                 {/*親Count: { count }*/}
                 {/*<CompB />*/}
-                <Memo />
+                {/*<Memo />*/}
+                <CountDisplay name="count1" count={count1}/>
+                <CountClick handleClick={addCount1}>addCount1</CountClick>
+                <CountDisplay name="count2" count={count2}/>
+                <CountClick handleClick={addCount2}>addCount2</CountClick>
             </header>
          </div>
       </AppContext.Provider>
